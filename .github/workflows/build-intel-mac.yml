@@ -1,29 +1,29 @@
 name: Build Intel macOS App
 
 on:
-  workflow_dispatch: # Allows manual trigger from the Actions tab
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: macos-13 # This is GitHub's standard Intel x86_64 macOS runner
+    runs-on: macos-13
 
     steps:
-      •  name: Checkout Repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      •  name: Set up JDK 21
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
+          distribution: temurin
           java-version: '21'
 
-      •  name: Grant execute permission for gradlew
+      - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      •  name: Build Intel macOS DMG
+      - name: Build Intel macOS DMG
         run: ./gradlew :desktopApp:packageDmg
 
-      •  name: Upload Artifact
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: BitChord-Intel-macOS
